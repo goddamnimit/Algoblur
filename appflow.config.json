@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "appId": "com.algoblur.app",
+      "root": ".",
+      "iosPath": "ios/App",
+      "webDir": "dist"
+    }
+  ]
+}

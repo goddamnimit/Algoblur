@@ -15,6 +15,7 @@ Your GitHub repository MUST have `package.json` at the very root. If you see a f
 ├── package.json
 ├── capacitor.config.ts
 ├── ionic.config.json
+├── appflow.config.json
 ├── src/
 ├── ios/
 └── ...
@@ -25,7 +26,8 @@ In your Ionic Appflow Dashboard:
 - **Environment Variables**: Add `ENABLE_SPM_SUPPORT=true`. This is required for Capacitor 8 projects using Swift Package Manager.
 - **Build Stack**: Select `macOS - 2024.04` or newer (requires Xcode 15+).
 
-### 3. Local Development
+### 3. Native Project Path
+I have added `appflow.config.json` which explicitly points Appflow to `ios/App` for the Xcode project. This resolves the "Could not find Xcode project" error.
 To sync your web changes to the native iOS project:
 ```bash
 npm run mobile:build
