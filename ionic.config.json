@@ -1,0 +1,7 @@
+{
+  "name": "AlgoBlur",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

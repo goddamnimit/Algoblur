@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
+    "postinstall": "cap sync",
     "mobile:build": "npm run build && npx cap sync",
     "mobile:open": "npx cap open ios"
   },

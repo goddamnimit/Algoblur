@@ -4,6 +4,7 @@ import { Progress } from './ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { ghostService } from '../services/ghostService';
 import { dbService } from '../services/dbService';
 import { Shield, Zap, Target, Database, Ghost, Power, PowerOff } from 'lucide-react';
@@ -47,14 +48,23 @@ export const Stats: React.FC = () => {
               <Badge variant="outline" className={`border-2 ${profile.noiseLevel > 70 ? 'border-emerald-500 text-emerald-500 bg-emerald-950/20' : 'border-zinc-800 text-zinc-500'}`}>
                 {profile.noiseLevel > 70 ? 'Highly Blurred' : 'Partially Visible'}
               </Badge>
-              <Button 
-                onClick={toggleActiveMode}
-                size="sm"
-                variant="outline"
-                className={`h-7 px-3 text-[10px] font-black uppercase tracking-tighter border-2 ${profile.activeModeActive ? 'border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-zinc-950' : 'border-zinc-800 text-zinc-500 hover:border-rose-500 hover:text-rose-500'}`}
-              >
-                {profile.activeModeActive ? 'Disable Active' : 'Enable Active'}
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    onClick={toggleActiveMode}
+                    size="sm"
+                    variant="outline"
+                    className={`h-7 px-3 text-[10px] font-black uppercase tracking-tighter border-2 ${profile.activeModeActive ? 'border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-zinc-950' : 'border-zinc-800 text-zinc-500 hover:border-rose-500 hover:text-rose-500'}`}
+                  >
+                    {profile.activeModeActive ? 'Disable Active' : 'Enable Active'}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-zinc-900 border-zinc-800 text-zinc-100 text-[10px] uppercase font-bold tracking-widest">
+                  {profile.activeModeActive 
+                    ? 'Switch back to standard background noise generation.' 
+                    : 'Increase noise frequency and intensity for maximum RTB interruption.'}
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
         </CardHeader>
@@ -90,13 +100,22 @@ export const Stats: React.FC = () => {
                 ? `Simulating: ${profile.activePersona || 'Random Persona'}`
                 : 'Background noise engine is currently offline.'}
             </p>
-            <Button 
-              onClick={toggleGhost}
-              variant={profile.ghostModeActive ? "destructive" : "default"}
-              className={`w-full font-bold uppercase tracking-widest text-xs ${!profile.ghostModeActive && 'bg-emerald-500 hover:bg-emerald-600 text-zinc-950'}`}
-            >
-              {profile.ghostModeActive ? <><PowerOff className="w-4 h-4 mr-2" /> Stop Engine</> : <><Power className="w-4 h-4 mr-2" /> Start Engine</>}
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  onClick={toggleGhost}
+                  variant={profile.ghostModeActive ? "destructive" : "default"}
+                  className={`w-full font-bold uppercase tracking-widest text-xs ${!profile.ghostModeActive && 'bg-emerald-500 hover:bg-emerald-600 text-zinc-950'}`}
+                >
+                  {profile.ghostModeActive ? <><PowerOff className="w-4 h-4 mr-2" /> Stop Engine</> : <><Power className="w-4 h-4 mr-2" /> Start Engine</>}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="bg-zinc-900 border-zinc-800 text-zinc-100 text-[10px] uppercase font-bold tracking-widest">
+                {profile.ghostModeActive 
+                  ? 'Shut down the background simulation engine.' 
+                  : 'Start simulating random web journeys to blur your intent.'}
+              </TooltipContent>
+            </Tooltip>
           </div>
         </CardContent>
       </Card>

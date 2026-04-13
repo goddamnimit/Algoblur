@@ -7,6 +7,7 @@ import { Timestamp } from 'firebase/firestore';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { X, Heart, ExternalLink, Info } from 'lucide-react';
 
 interface AdSwiperProps {
@@ -103,22 +104,37 @@ export const AdSwiper: React.FC<AdSwiperProps> = ({ ads, onSwipe }) => {
                   <span className="text-zinc-100 font-mono font-bold">${(currentAd.price / 100).toFixed(2)}</span>
                 </div>
                 <div className="flex gap-3">
-                  <Button 
-                    size="icon" 
-                    variant="outline" 
-                    className="rounded-full border-zinc-800 bg-zinc-900 hover:bg-rose-900/20 hover:border-rose-900 text-rose-500"
-                    onClick={() => handleSwipe('skip')}
-                  >
-                    <X className="w-6 h-6" />
-                  </Button>
-                  <Button 
-                    size="icon" 
-                    variant="outline" 
-                    className="rounded-full border-zinc-800 bg-zinc-900 hover:bg-emerald-900/20 hover:border-emerald-900 text-emerald-500"
-                    onClick={() => handleSwipe('click')}
-                  >
-                    <Heart className="w-6 h-6" />
-                  </Button>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        size="icon" 
+                        variant="outline" 
+                        className="rounded-full border-zinc-800 bg-zinc-900 hover:bg-rose-900/20 hover:border-rose-900 text-rose-500"
+                        onClick={() => handleSwipe('skip')}
+                      >
+                        <X className="w-6 h-6" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent className="bg-zinc-900 border-zinc-800 text-zinc-100 text-[10px] uppercase font-bold tracking-widest">
+                      Skip this ad. No noise generated.
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        size="icon" 
+                        variant="outline" 
+                        className="rounded-full border-zinc-800 bg-zinc-900 hover:bg-emerald-900/20 hover:border-emerald-900 text-emerald-500"
+                        onClick={() => handleSwipe('click')}
+                      >
+                        <Heart className="w-6 h-6" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent className="bg-zinc-900 border-zinc-800 text-zinc-100 text-[10px] uppercase font-bold tracking-widest">
+                      Interact to "Blur" your profile with this category.
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               </div>
             </CardContent>

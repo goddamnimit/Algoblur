@@ -5,6 +5,7 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { Shield, Globe, Search, ArrowRight, Lock, EyeOff, AlertTriangle } from 'lucide-react';
 import { Timestamp } from 'firebase/firestore';
 
@@ -66,9 +67,16 @@ export const PrivacyPortal: React.FC = () => {
                 className="pl-10 bg-zinc-900 border-2 border-zinc-800 focus:border-rose-500 transition-colors font-mono text-sm"
               />
             </div>
-            <Button type="submit" className="bg-rose-500 hover:bg-rose-600 text-zinc-950 font-black uppercase tracking-widest text-xs px-6">
-              Go <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button type="submit" className="bg-rose-500 hover:bg-rose-600 text-zinc-950 font-black uppercase tracking-widest text-xs px-6">
+                  Go <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="bg-zinc-900 border-zinc-800 text-zinc-100 text-[10px] uppercase font-bold tracking-widest">
+                Launch the secure sandbox and intercept RTB requests for this destination.
+              </TooltipContent>
+            </Tooltip>
           </form>
         </CardContent>
       </Card>
