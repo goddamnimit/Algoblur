@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "Ad": {
+      "title": "Ad",
+      "description": "A cheap advertisement served to users to obfuscate their profile.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the ad." },
+        "description": { "type": "string", "description": "The description of the ad." },
+        "category": { "type": "string", "description": "The interest category this ad targets (e.g., 'Gardening', 'Crypto', 'Knitting')." },
+        "imageUrl": { "type": "string", "format": "uri", "description": "URL to the ad image." },
+        "targetUrl": { "type": "string", "format": "uri", "description": "URL the ad points to." },
+        "price": { "type": "number", "description": "The cost of the ad in cents." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the ad was created." }
+      },
+      "required": ["title", "description", "category", "imageUrl", "targetUrl", "price"]
+    },
+    "UserInteraction": {
+      "title": "UserInteraction",
+      "description": "A record of a user interacting with an ad.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The ID of the user." },
+        "adId": { "type": "string", "description": "The ID of the ad." },
+        "type": { "type": "string", "enum": ["view", "skip", "click"], "description": "The type of interaction." },
+        "category": { "type": "string", "description": "The category of the ad interacted with." },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the interaction occurred." }
+      },
+      "required": ["userId", "adId", "type", "category", "timestamp"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "The user's profile and obfuscation stats.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The ID of the user." },
+        "noiseLevel": { "type": "number", "description": "A score representing how much noise has been added to the profile (0-100)." },
+        "interactionsCount": { "type": "number", "description": "Total number of interactions." },
+        "categoriesObfuscated": { "type": "array", "items": { "type": "string" }, "description": "List of unique categories interacted with." },
+        "ghostModeActive": { "type": "boolean", "description": "Whether the background noise engine is running." },
+        "activePersona": { "type": "string", "description": "The current persona being simulated (e.g., 'Luxury Traveler')." },
+        "role": { "type": "string", "enum": ["admin", "user"], "description": "The user's role for access control." }
+      },
+      "required": ["userId", "noiseLevel", "interactionsCount", "role"]
+    },
+    "AdCampaign": {
+      "title": "AdCampaign",
+      "description": "A direct-placement ad campaign from a small business.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "businessName": { "type": "string" },
+        "adId": { "type": "string" },
+        "budget": { "type": "number" },
+        "impressionsRemaining": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "paused", "completed"] }
+      },
+      "required": ["businessId", "adId", "budget", "impressionsRemaining", "status"]
+    },
+    "GhostJourney": {
+      "title": "GhostJourney",
+      "description": "A record of a simulated background visit.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "targetUrl": { "type": "string" },
+        "persona": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "targetUrl", "persona", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/ads/{adId}": {
+      "schema": "Ad",
+      "description": "Collection of all advertisements."
+    },
+    "/interactions/{interactionId}": {
+      "schema": "UserInteraction",
+      "description": "Collection of user interactions with ads."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile and statistics."
+    },
+    "/campaigns/{campaignId}": {
+      "schema": "AdCampaign",
+      "description": "Direct-placement ad campaigns."
+    },
+    "/ghost_journeys/{journeyId}": {
+      "schema": "GhostJourney",
+      "description": "Logs of background noise generation."
+    }
+  }
+}
