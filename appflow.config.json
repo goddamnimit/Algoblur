@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "appId": "com.algoblur.app",
+      "appId": "bcb18da4",
       "root": ".",
       "iosPath": "ios/App",
       "webDir": "dist"

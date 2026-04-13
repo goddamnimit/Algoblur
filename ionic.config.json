@@ -1,5 +1,6 @@
 {
   "name": "AlgoBlur",
+  "app_id": "bcb18da4",
   "integrations": {
     "capacitor": {}
   },

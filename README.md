@@ -27,7 +27,7 @@ In your Ionic Appflow Dashboard:
 - **Build Stack**: Select `macOS - 2024.04` or newer (requires Xcode 15+).
 
 ### 3. Native Project Path
-I have added `appflow.config.json` which explicitly points Appflow to `ios/App` for the Xcode project. This resolves the "Could not find Xcode project" error.
+I have added `appflow.config.json` which explicitly points Appflow to `ios/App` for the Xcode project. I have also updated the `appId` to `bcb18da4` as required by your Appflow dashboard. This resolves the "missing entry for appId" error.
 To sync your web changes to the native iOS project:
 ```bash
 npm run mobile:build
